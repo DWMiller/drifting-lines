@@ -1,9 +1,10 @@
-function generateParticles(count, arr) {
+function generateParticles(count, arr, type) {
     for (var i = 0; i < count; i++) {
         let pos = util.randCoord(config.w, config.h);
         arr.push(newParticle({
             x: pos.x,
             y: pos.y,
+            type: type,
             color: util.randomColor()
         }));
     }
@@ -33,7 +34,6 @@ function simulate() {
 }
 
 function simulateParticle(particle) {
-
     if (!particle.target) {
         particle.setTarget(util.arrayRand(targets));
     }
@@ -47,6 +47,14 @@ function simulateParticle(particle) {
         particle.vector = vector(particle, particle.destination);
     }
 
+    if (particle.type === 'line' && !config.movingLines) {
+        return;
+    }
+
+    if (particle.type === 'target' && !config.movingTargets) {
+        return;
+    }
+    
     if (physics.hitTest(particle, particle.destination)) {
         particle.destination = false;
         particle.vector = false;
@@ -67,8 +75,8 @@ function start() {
     targets = [];
     particleCount = area * config.lineCount;
 
-    generateParticles(particleCount, particles);
-    generateParticles(config.targetCount, targets);
+    generateParticles(particleCount, particles, 'line');
+    generateParticles(config.targetCount, targets, 'target');
 
     if (!started) {
         startSimulation();
@@ -96,3 +104,5 @@ gui.add(config, 'removeTarget');
 gui.add(config, 'moreLines');
 gui.add(config, 'lessLines');
 gui.add(config, 'lineWidth').min(1).step(1);
+gui.add(config, 'movingLines');
+gui.add(config, 'movingTargets');

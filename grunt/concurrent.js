@@ -1,4 +1,4 @@
 module.exports = {
-    first: ['sass','concat'],
+    first: ['sass', 'concat', 'copy'],
     last: ['babel']
 };

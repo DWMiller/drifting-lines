@@ -1,7 +1,11 @@
 module.exports = {
     js: {
         files: ['app/js/**/*.js'],
-        tasks: ['concat','babel']
+        tasks: ['concat', 'babel']
+    },
+    html: {
+        files: ['app/index.html'],
+        tasks: ['copy']
     },
     sass: {
         files: ['app/sass/**/*'],

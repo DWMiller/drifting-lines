@@ -3,7 +3,9 @@ let config = {
     w: 0,
     lineCount: 0.0001, //number of particles per pixel
     targetCount: 2,
-    lineWidth: 3,
+    lineWidth: 2,
+    movingTargets: true,
+    movingLines: true,
     addTarget: function() {
         this.targetCount++;
         start();

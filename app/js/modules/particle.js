@@ -2,6 +2,7 @@ let particlePrototype = {
     x: 0,
     y: 0,
     r: 1,
+    type: false,
     color: '#FFF',
     vector: false,
     target: false,
